@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Room Designer: Generative Masking</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <h1>Design Your Room</h1>
+        <p>1. Draw where you want your new object. 2. Describe it. 3. Carve.</p>
+
+        <div class="canvas-wrapper">
+            <img id="base-image" src="https://i.ibb.co/L5rMvV6/empty-room.jpg" alt="Empty Room">
+            <canvas id="drawing-canvas"></canvas>
+        </div>
+
+        <div class="controls-container">
+            <label for="image-upload" class="upload-button">Upload Room</label>
+            <input type="file" id="image-upload" accept="image/png, image/jpeg" class="hidden-input">
+            
+            <button id="undo-button" class="secondary-button" title="Undo (Ctrl+Z)">Undo</button>
+            
+            <input type="text" id="prompt-input" placeholder="e.g., 'a rustic wooden coffee table'">
+            <button id="generate-button">Carve!</button>
+        </div>
+
+        <div id="status-display"></div>
+        <div id="mask-display-area" class="hidden">
+            <h3>Generated Mask (for API):</h3>
+            <img id="mask-preview" src="" alt="Mask Preview">
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
