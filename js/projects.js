@@ -88,7 +88,7 @@ async function handleLoadProject(id) {
             state.currentSessionImageBase64 = data.imageUrl;
             state.originalImageBase64 = data.imageUrl;
             state.completedIds = data.furnitureData.filter(i => i.isComplete).map(i => i.id);
-            state.itemCounter = Math.max(...data.furnitureData.map(i => parseInt(i.id.split('-')[1])), 0);
+            state.itemCounter = data.furnitureData.length;
             state.currentProjectName = data.name;
             state.designComplete = false;
 

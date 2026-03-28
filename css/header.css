@@ -50,6 +50,17 @@
     color: var(--text-dark);
 }
 
+.logo-link {
+    text-decoration: none;
+    cursor: pointer;
+    display: block;
+    transition: opacity 0.2s ease;
+}
+
+.logo-link:hover {
+    opacity: 0.8;
+}
+
 .logo-container {
     display: flex;
     align-items: center;

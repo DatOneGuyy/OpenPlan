@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 16px;
+    padding: 16px 0;
     gap: 4px;
     flex-shrink: 0;
 }
@@ -23,6 +23,11 @@
     cursor: pointer;
     transition: background-color 0.2s ease;
     position: relative;
+    flex-shrink: 0;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
 }
 
 /* Tooltip styling attached via data-tooltip */

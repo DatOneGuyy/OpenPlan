@@ -24,15 +24,17 @@
         <!-- Top Nav -->
         <header class="topnav">
             <div class="topnav-left">
-                <div class="logo-container">
-                    <img src="/icons/openplan.svg" alt="OpenPlan Logo" class="logo-icon">
-                    <span class="logo-text">OpenPlan</span>
-                </div>
+                <a href="/welcome" class="logo-link">
+                    <div class="logo-container">
+                        <img src="/icons/openplan.svg" alt="OpenPlan Logo" class="logo-icon">
+                        <span class="logo-text">OpenPlan</span>
+                    </div>
+                </a>
                 <div class="nav-divider"></div>
                 <div class="auth-container" id="authContainer">
-                <a href="/login" class="upload-btn" id="loginTrigger">Log In</a>
-                <a href="/signup" class="upload-btn" id="registerTrigger" style="margin: 0;">Sign Up</a>
-            </div>
+                    <a href="/login" class="upload-btn" id="loginTrigger">Log In</a>
+                    <a href="/signup" class="upload-btn" id="registerTrigger" style="margin: 0;">Sign Up</a>
+                </div>
                 <div class="user-status-container" id="userStatusContainer" style="display: none;">
                     <div class="user-info">
                         <img src="/icons/user.svg" alt="User" class="user-icon">
@@ -41,7 +43,7 @@
                     <button class="upload-btn" id="logoutBtn" style="margin-left: 12px;">Logout</button>
                 </div>
             </div>
-            
+
             <label for="room-upload" class="upload-btn">
                 <img src="/icons/upload.svg" alt="Upload" class="upload-icon">
                 Upload Room
@@ -53,9 +55,6 @@
         <div class="main-content">
             <!-- Sidebar -->
             <aside class="sidebar">
-                <button class="sidebar-btn" data-tooltip="Room">
-                    <img src="/icons/file.svg" alt="Room" class="sidebar-icon">
-                </button>
                 <button class="sidebar-btn active" data-tooltip="Select">
                     <img src="/icons/select.svg" alt="Select" class="sidebar-icon">
                 </button>
@@ -67,6 +66,11 @@
                 </button>
                 <button class="sidebar-btn" data-tooltip="Inspiration">
                     <img src="/icons/inspiration.svg" alt="Inspiration" class="sidebar-icon">
+                </button>
+
+                <!-- Bottom Aligned Section -->
+                <button class="sidebar-btn sidebar-bottom" data-tooltip="Room">
+                    <img src="/icons/file.svg" alt="Room" class="sidebar-icon">
                 </button>
             </aside>
 
@@ -178,7 +182,7 @@
                     <div class="inventory-total" id="inventoryTotal">Total: $0.00</div>
                     <button class="upload-btn" id="designRoomBtn" style="border: none; cursor: pointer;">
                         <img src="/icons/openplan.svg" alt="Design" class="upload-icon">
-                        Design Room
+                        Design
                     </button>
                 </div>
             </aside>
@@ -209,33 +213,52 @@
                 <div class="inspiration-grid" id="inspirationGrid">
                     <!-- Column 1 -->
                     <div class="masonry-column">
-                        <div class="masonry-item"><img src="inspiration/Image__Modern_Minimalist_Living_.png" alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Modern_Minimalist_Living_.png"
+                                alt="Inspiration"></div>
                         <div class="masonry-item"><img src="inspiration/image_6.png" alt="Inspiration"></div>
                         <div class="masonry-item"><img src="inspiration/image_7.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Rustic_Farmhouse_Dining_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Minimalist_Kitchen_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Industrial_Loft_.png" alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Rustic_Farmhouse_Dining_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Minimalist_Kitchen_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Industrial_Loft_.png" alt="Inspiration">
+                        </div>
                         <div class="masonry-item"><img src="inspiration/image_8.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Elegant_Dining_Room_.png" alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Elegant_Dining_Room_.png"
+                                alt="Inspiration"></div>
                         <div class="masonry-item"><img src="inspiration/image_10.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Bohemian_Bedroom_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Plant-Filled_Sunroom_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Open_Concept_Kitchen_.png" alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Bohemian_Bedroom_.png" alt="Inspiration">
+                        </div>
+                        <div class="masonry-item"><img src="inspiration/Image__Plant-Filled_Sunroom_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Open_Concept_Kitchen_.png"
+                                alt="Inspiration"></div>
                     </div>
                     <!-- Column 2 -->
                     <div class="masonry-column">
-                        <div class="masonry-item"><img src="inspiration/Image__Baroque_Elegance_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Vintage_Furniture_Styling_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Scandinavian_Bedroom_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Mid-Century_Modern_.png" alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Baroque_Elegance_.png" alt="Inspiration">
+                        </div>
+                        <div class="masonry-item"><img src="inspiration/Image__Vintage_Furniture_Styling_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Scandinavian_Bedroom_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Mid-Century_Modern_.png"
+                                alt="Inspiration"></div>
                         <div class="masonry-item"><img src="inspiration/image_9.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Contemporary_Apartment_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Cozy_Reading_Nook_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Modern_Bathroom_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Modern_Office_Workspace_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Modern_Entryway_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Luxury_Bedroom_.png" alt="Inspiration"></div>
-                        <div class="masonry-item"><img src="inspiration/Image__Cozy_Fireplace_Living_.png" alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Contemporary_Apartment_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Cozy_Reading_Nook_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Modern_Bathroom_.png" alt="Inspiration">
+                        </div>
+                        <div class="masonry-item"><img src="inspiration/Image__Modern_Office_Workspace_.png"
+                                alt="Inspiration"></div>
+                        <div class="masonry-item"><img src="inspiration/Image__Modern_Entryway_.png" alt="Inspiration">
+                        </div>
+                        <div class="masonry-item"><img src="inspiration/Image__Luxury_Bedroom_.png" alt="Inspiration">
+                        </div>
+                        <div class="masonry-item"><img src="inspiration/Image__Cozy_Fireplace_Living_.png"
+                                alt="Inspiration"></div>
                     </div>
                 </div>
             </aside>
@@ -266,16 +289,6 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Decorative "Try" Bar -->
-                <div class="try-bar">
-                    <div class="try-input-container">
-                        <p class="try-placeholder">Try "I want this to have a Baroque aesthetic"</p>
-                        <div class="try-icon">
-                            <p>􀒋</p>
-                        </div>
-                    </div>
-                </div>
             </aside>
 
         </div>
@@ -288,11 +301,15 @@
                 <h3 id="dialogTitle">Confirm Action</h3>
             </div>
             <div class="modal-body" style="padding-top: 0; padding-bottom: 24px;">
-                <p id="dialogMessage" style="font-size: 14px; color: var(--text-gray-dark); line-height: 1.5; margin: 0;"></p>
+                <p id="dialogMessage"
+                    style="font-size: 14px; color: var(--text-gray-dark); line-height: 1.5; margin: 0;"></p>
             </div>
-            <div class="modal-footer" id="dialogFooter" style="border-top: 1px solid var(--border-color); padding: 16px 24px; gap: 12px; justify-content: flex-end;">
-                <button class="category-chip" id="dialogCancelBtn" style="margin: 0; padding: 10px 20px;">Cancel</button>
-                <button class="upload-btn" id="dialogConfirmBtn" style="margin: 0; padding: 10px 20px; min-width: 100px; justify-content: center;">Confirm</button>
+            <div class="modal-footer" id="dialogFooter"
+                style="border-top: 1px solid var(--border-color); padding: 16px 24px; gap: 12px; justify-content: flex-end;">
+                <button class="category-chip" id="dialogCancelBtn"
+                    style="margin: 0; padding: 10px 20px;">Cancel</button>
+                <button class="upload-btn" id="dialogConfirmBtn"
+                    style="margin: 0; padding: 10px 20px; min-width: 100px; justify-content: center;">Confirm</button>
             </div>
         </div>
     </div>
@@ -341,7 +358,11 @@
             <div class="modal-header">
                 <h3>My Rooms</h3>
                 <button class="inventory-item-delete" id="closeProjectsModalBtn">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                    </svg>
                 </button>
             </div>
             <div class="modal-body" style="overflow-y: auto;">

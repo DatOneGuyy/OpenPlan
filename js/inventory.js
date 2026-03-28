@@ -46,23 +46,26 @@ export function updateInventoryUI() {
             delBtn.className = 'inventory-item-delete';
             delBtn.title = 'Remove item';
             delBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>`;
-            
-            if (state.isDesigning) {
-                delBtn.disabled = true;
-                delBtn.style.opacity = '0.5';
-                delBtn.style.cursor = 'not-allowed';
-            } else if (isFinished) {
-                delBtn.style.display = 'none'; // Lock completed items
-            } else {
-                delBtn.addEventListener('click', () => {
-                    removeFromInventory(index);
-                });
-            }
 
             row.appendChild(thumb);
             row.appendChild(indexBadge);
             row.appendChild(title);
-            row.appendChild(delBtn);
+
+            if (state.isDesigning && !isFinished) {
+                // Replace delete button with a spinner during design
+                const spinner = document.createElement('div');
+                spinner.className = 'inventory-item-spinner';
+                row.appendChild(spinner);
+            } else if (isFinished) {
+                // Keep the row clean but ensure delBtn is not visible
+                delBtn.style.display = 'none';
+                row.appendChild(delBtn);
+            } else {
+                delBtn.addEventListener('click', () => {
+                    removeFromInventory(index);
+                });
+                row.appendChild(delBtn);
+            }
 
             inventoryList.appendChild(row);
         });
@@ -71,7 +74,7 @@ export function updateInventoryUI() {
         state.addedFurnishings.forEach(item => {
             total += parsePrice(item.price);
         });
-        
+
         const totalEl = document.getElementById('inventoryTotal');
         if (totalEl) {
             totalEl.textContent = `Total: $${total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
@@ -80,7 +83,7 @@ export function updateInventoryUI() {
         emptyInventoryState.style.display = 'flex';
         inventoryList.style.display = 'none';
         inventoryList.innerHTML = '';
-        
+
         const totalEl = document.getElementById('inventoryTotal');
         if (totalEl) totalEl.textContent = `Total: $0.00`;
     }
@@ -89,19 +92,23 @@ export function updateInventoryUI() {
     const designRoomBtn = document.getElementById('designRoomBtn');
     if (designRoomBtn) {
         if (state.isDesigning) {
-            // Processing: already handled in the designRoomBtn click handler/loop
             designRoomBtn.disabled = true;
-            designRoomBtn.style.opacity = '1'; // Keep full opacity during work
-            designRoomBtn.style.cursor = 'wait';
+            designRoomBtn.textContent = 'Designing';
+            designRoomBtn.style.backgroundColor = '#f0f0f0';
+            designRoomBtn.style.color = 'var(--text-gray)';
+            designRoomBtn.style.opacity = '1';
         } else {
             const hasRoom = !!state.originalImageBase64;
             const pendingItems = state.addedFurnishings.filter(item => {
                 const isFinished = item.completed === true || state.completedIds.includes(item.id);
                 return !isFinished;
             });
-            
+
             const shouldDisable = !hasRoom || pendingItems.length === 0;
             designRoomBtn.disabled = shouldDisable;
+            designRoomBtn.textContent = 'Design';
+            designRoomBtn.style.backgroundColor = 'var(--primary-blue)';
+            designRoomBtn.style.color = 'var(--text-white)';
             designRoomBtn.style.opacity = shouldDisable ? '0.5' : '1';
             designRoomBtn.style.cursor = shouldDisable ? 'not-allowed' : 'pointer';
         }
@@ -143,7 +150,7 @@ export function addToInventory(item) {
     }
     state.addedFurnishings.push(newItem);
     state.designComplete = false;
-    
+
     updateInventoryUI();
     drawMasks();
 }
@@ -167,7 +174,7 @@ export function initInventory() {
 
             state.isDesigning = true;
             designRoomBtn.disabled = true;
-            designRoomBtn.textContent = "Analyzing Layout...";
+            designRoomBtn.textContent = "Designing";
             updateInventoryUI();
 
             try {
@@ -185,7 +192,7 @@ export function initInventory() {
                 // 2. Generate Masks with Metadata for pending items
                 const polygons = pendingItems.map(item => item.points);
                 const ids = pendingItems.map(item => item.id);
-                
+
                 const maskResponse = await fetch('/api/generate_masks', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -209,7 +216,8 @@ export function initInventory() {
                     const item = state.addedFurnishings.find(it => it.id === maskObj.id);
                     if (!item) continue;
 
-                    designRoomBtn.textContent = `Inpainting Item ${i + 1}/${maskData.masks.length}...`;
+                    // Keep general text as requested
+                    designRoomBtn.textContent = "Designing";
 
                     // Construct detailed prompt
                     const prompt = `Seamlessly inpaint a ${item.title} into the masked area of the room. Ensure the ${item.category} matches the existing room's lighting, shadows, and perspective for a photorealistic integrated look.`;
@@ -244,7 +252,7 @@ export function initInventory() {
                         if (!state.completedIds.includes(maskObj.id)) {
                             state.completedIds.push(maskObj.id);
                         }
-                        
+
                         // Force a clean UI sync
                         queueMicrotask(() => {
                             updateInventoryUI();
@@ -268,7 +276,7 @@ export function initInventory() {
             } finally {
                 state.isDesigning = false;
                 designRoomBtn.disabled = false;
-                designRoomBtn.innerHTML = `<img src="/icons/openplan.svg" alt="Design" class="upload-icon"> Design Room`;
+                designRoomBtn.innerHTML = `<img src="/icons/openplan.svg" alt="Design" class="upload-icon"> Design`;
             }
         });
     }
