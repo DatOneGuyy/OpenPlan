@@ -1,0 +1,59 @@
+.room-menu {
+    display: flex;
+    flex-direction: column;
+    padding: 0 24px;
+    gap: 12px;
+}
+
+.room-menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background-color: var(--primary-blue-light);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 100%;
+}
+
+.room-menu-item:hover {
+    background-color: var(--text-white);
+    border-color: var(--primary-blue-light);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.room-menu-icon {
+    width: 40px;
+    height: 40px;
+    background-color: var(--text-white);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    color: var(--primary-blue);
+    flex-shrink: 0;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.room-menu-text {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.room-menu-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.room-menu-desc {
+    font-size: 12px;
+    color: var(--text-gray);
+    line-height: 1.4;
+}
