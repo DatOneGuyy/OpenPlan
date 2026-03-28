@@ -11,8 +11,13 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key-12345')
 SQLALCHEMY_DATABASE_URI = 'sqlite:///app.db'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
-# API URLs
-GEMINI_GENERATE_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent?key={GEMINI_API_KEY}"
-GEMINI_ANALYZE_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:generateContent?key={GEMINI_API_KEY}"
-GEMINI_PREDICT_URL = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3-pro-image-preview:predict?key={GEMINI_API_KEY}"
+# API URLs - Note: models/gemini-pro-vision or gemini-1.5-flash-latest are standard
+# gemini-3-pro-image-preview is a highly experimental model name and might 
+# require specific allowlisting or regional availability.
+BASE_GEMINI_URL = "https://generativelanguage.googleapis.com/v1beta/models"
+MODEL_NAME = "gemini-3-pro-image-preview"
+
+GEMINI_GENERATE_URL = f"{BASE_GEMINI_URL}/{MODEL_NAME}:generateContent?key={GEMINI_API_KEY}"
+GEMINI_ANALYZE_URL = f"{BASE_GEMINI_URL}/{MODEL_NAME}:generateContent?key={GEMINI_API_KEY}"
+GEMINI_PREDICT_URL = f"{BASE_GEMINI_URL}/{MODEL_NAME}:predict?key={GEMINI_API_KEY}"
 SERPAPI_SEARCH_URL = 'https://serpapi.com/search.json'

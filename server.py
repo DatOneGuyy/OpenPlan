@@ -21,9 +21,17 @@ with app.app_context():
     db.create_all()
     print("Database initialized and tables created.")
 
-# Initialize Login Manager
-login_manager = LoginManager()
-login_manager.init_app(app)
+# Startup Environment Check
+from config import GEMINI_API_KEY, SERPAPI_API_KEY
+if GEMINI_API_KEY:
+    print(f"✓ Gemini API Key: Configured (Length: {len(GEMINI_API_KEY)})")
+else:
+    print("✗ Gemini API Key: MISSING in environment variables!")
+
+if SERPAPI_API_KEY:
+    print(f"✓ SerpApi Key: Configured (Length: {len(SERPAPI_API_KEY)})")
+else:
+    print("✗ SerpApi Key: MISSING in environment variables!")
 
 @login_manager.user_loader
 def load_user(user_id):
