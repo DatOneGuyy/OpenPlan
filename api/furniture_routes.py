@@ -61,7 +61,7 @@ def search_furniture():
                     "category": query.capitalize(),
                     "seller": item.get('source', 'Unknown Seller'),
                     "rating": item.get('rating'),
-                    "link": item.get('link', '#')
+                    "link": item.get('link') or item.get('product_link') or '#'
                 })
             return jsonify({"results": results}), 200
         else:

@@ -45,83 +45,85 @@ export function renderFurnitureData(data, query) {
     if (data.results && data.results.length > 0) {
         resultsCountText.textContent = `${data.results.length} items for "${query}"`;
         
-            data.results.forEach(item => {
-                const card = document.createElement('div');
-                card.className = 'furniture-card';
-                
-                // Card Link (Merchant)
-                const cardLink = document.createElement('a');
-                cardLink.className = 'furniture-card-link';
-                cardLink.href = item.link || '#';
-                cardLink.target = '_blank';
-                cardLink.rel = 'noopener noreferrer';
+                data.results.forEach(item => {
+                    const card = document.createElement('div');
+                    card.className = 'furniture-card';
+                    
+                    // The entire card content will be wrapped in this link
+                    const cardLink = document.createElement('a');
+                    cardLink.className = 'furniture-card-link';
+                    cardLink.href = item.link || '#';
+                    cardLink.target = '_blank';
+                    cardLink.rel = 'noopener noreferrer';
+                    cardLink.title = `View on ${item.seller || 'Seller Site'}`;
 
-                const imgWrapper = document.createElement('div');
-                imgWrapper.className = 'furniture-image-wrapper';
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.className = 'furniture-image-wrapper';
 
-                const img = document.createElement('img');
-                img.className = 'furniture-image';
-                img.src = item.thumbnail || 'https://via.placeholder.com/200';
-                img.alt = item.title;
-                img.loading = 'lazy';
-                
-                // Redesigned Add Button
-                const addBtn = document.createElement('div');
-                addBtn.className = 'add-to-room-btn';
-                addBtn.innerHTML = 'Add to Room';
-                
-                addBtn.addEventListener('click', (e) => {
-                    e.preventDefault(); // prevent link redirect
-                    e.stopPropagation(); // prevent card click
-                    addToInventory(item);
+                    const img = document.createElement('img');
+                    img.className = 'furniture-image';
+                    img.src = item.thumbnail || 'https://via.placeholder.com/200';
+                    img.alt = item.title;
+                    img.loading = 'lazy';
+                    
+                    // Add to Room Button (Actionable area inside the link)
+                    const addBtn = document.createElement('div');
+                    addBtn.className = 'add-to-room-btn';
+                    addBtn.innerHTML = 'Add to Room';
+                    addBtn.title = 'Add this item to your design';
+                    
+                    addBtn.addEventListener('click', (e) => {
+                        e.preventDefault(); // Stop the <a> from navigating
+                        e.stopPropagation(); // Stop the click from reaching the cardLink
+                        addToInventory(item);
+                        console.log(`Added ${item.title} to inventory`);
+                    });
+
+                    imgWrapper.appendChild(img);
+                    imgWrapper.appendChild(addBtn);
+                    
+                    const details = document.createElement('div');
+                    details.className = 'furniture-details';
+                    
+                    const title = document.createElement('div');
+                    title.className = 'furniture-title';
+                    title.textContent = item.title;
+                    
+                    const seller = document.createElement('div');
+                    seller.className = 'furniture-seller';
+                    seller.textContent = item.seller || 'Unknown Source';
+                    
+                    const price = document.createElement('div');
+                    price.className = 'furniture-price';
+                    price.textContent = item.price || 'N/A';
+                    
+                    const footerRow = document.createElement('div');
+                    footerRow.className = 'furniture-footer-row';
+                    
+                    const badge = document.createElement('div');
+                    badge.className = 'furniture-badge';
+                    badge.textContent = item.category || 'Item';
+                    
+                    const rating = document.createElement('div');
+                    rating.className = 'furniture-rating';
+                    if (item.rating) {
+                        rating.innerHTML = `★ <span>${item.rating}</span>`;
+                    }
+
+                    footerRow.appendChild(badge);
+                    if (item.rating) footerRow.appendChild(rating);
+                    
+                    details.appendChild(title);
+                    details.appendChild(seller);
+                    details.appendChild(price);
+                    details.appendChild(footerRow);
+                    
+                    cardLink.appendChild(imgWrapper);
+                    cardLink.appendChild(details);
+                    card.appendChild(cardLink);
+                    
+                    furnitureGrid.appendChild(card);
                 });
-
-                imgWrapper.appendChild(img);
-                imgWrapper.appendChild(addBtn);
-                
-                const details = document.createElement('div');
-                details.className = 'furniture-details';
-                
-                const title = document.createElement('div');
-                title.className = 'furniture-title';
-                title.textContent = item.title;
-                title.title = item.title;
-                
-                const seller = document.createElement('div');
-                seller.className = 'furniture-seller';
-                seller.textContent = item.seller || 'Unknown Source';
-                
-                const price = document.createElement('div');
-                price.className = 'furniture-price';
-                price.textContent = item.price || 'N/A';
-                
-                const footerRow = document.createElement('div');
-                footerRow.className = 'furniture-footer-row';
-                
-                const badge = document.createElement('div');
-                badge.className = 'furniture-badge';
-                badge.textContent = item.category || 'Item';
-                
-                const rating = document.createElement('div');
-                rating.className = 'furniture-rating';
-                if (item.rating) {
-                    rating.innerHTML = `★ <span>${item.rating}</span>`;
-                }
-
-                footerRow.appendChild(badge);
-                if (item.rating) footerRow.appendChild(rating);
-                
-                details.appendChild(title);
-                details.appendChild(seller);
-                details.appendChild(price);
-                details.appendChild(footerRow);
-                
-                cardLink.appendChild(imgWrapper);
-                cardLink.appendChild(details);
-                card.appendChild(cardLink);
-                
-                furnitureGrid.appendChild(card);
-            });
     } else {
         resultsCountText.textContent = `No items found for "${query}"`;
     }
