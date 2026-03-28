@@ -16,6 +16,11 @@ CORS(app)
 # Initialize Database
 db.init_app(app)
 
+# Ensure database tables exist (Crucial for fresh deployments like Railway)
+with app.app_context():
+    db.create_all()
+    print("Database initialized and tables created.")
+
 # Initialize Login Manager
 login_manager = LoginManager()
 login_manager.init_app(app)
