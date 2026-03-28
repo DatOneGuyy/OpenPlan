@@ -4,4 +4,5 @@ flask-sqlalchemy
 flask-login
 requests
 gunicorn
-# Add any specialized dependencies here
+numpy
+opencv-python
