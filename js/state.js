@@ -1,5 +1,9 @@
 // Centralized state for the Room Designer app
 export const state = {
+    // Auth
+    isLoggedIn: false,
+    currentProjectName: null,
+    
     // Inventory
     addedFurnishings: [],
     

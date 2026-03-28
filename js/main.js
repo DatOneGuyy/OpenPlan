@@ -4,8 +4,14 @@ import { setupFurnitureBrowser } from './furniture.js';
 import { initInventory } from './inventory.js';
 import { setupModals } from './modals.js';
 import { initRoomModule } from './room.js';
+import { initAuth } from './auth.js';
+import { initProjects } from './projects.js';
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Initialization
+    initAuth();
+    initProjects();
+
     // Canvas & Image Upload
     initCanvas();
     const fileInput = document.getElementById('room-upload');

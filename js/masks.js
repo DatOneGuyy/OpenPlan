@@ -25,8 +25,14 @@ export function initMasks() {
 }
 
 export function drawMasks() {
-    const svg = document.getElementById('maskOverlay');
-    if (!svg) return;
+    let svg = document.getElementById('maskOverlay');
+    if (!svg) {
+        const canvasArea = document.querySelector('.canvas-area');
+        if (!canvasArea) return;
+        initMasks();
+        svg = document.getElementById('maskOverlay');
+        if (!svg) return;
+    }
     
     svg.innerHTML = ''; // Clear for redraw
     

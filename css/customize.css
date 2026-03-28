@@ -25,10 +25,10 @@
 }
 
 .section-card {
-    background: var(--primary-blue-light);
+    background: var(--primary-blue-soft);
     border-radius: 14px;
     padding: 16px;
-    border: 1px solid rgba(65, 129, 240, 0.1);
+    border: 1px solid var(--primary-blue-soft-border);
 }
 
 .analysis-section h3, .suggestions-section h3 {
@@ -62,8 +62,8 @@
 }
 
 .suggestion-card {
-    background: rgba(65, 129, 240, 0.05); /* Lighter base */
-    border: 1px solid rgba(65, 129, 240, 0.15);
+    background: var(--primary-blue-soft);
+    border: 1px solid var(--primary-blue-soft-border);
     border-radius: 14px;
     padding: 16px 20px;
     cursor: pointer;
@@ -74,8 +74,8 @@
 }
 
 .suggestion-card:hover {
-    background: rgba(65, 129, 240, 0.15);
-    border-color: rgba(65, 129, 240, 0.3);
+    background: var(--primary-blue-soft-hover);
+    border-color: var(--primary-blue-soft-border-hover);
 }
 
 .suggestion-header {

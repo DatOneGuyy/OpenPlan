@@ -4,7 +4,7 @@ import numpy as np
 import cv2
 import requests
 from config import GEMINI_API_KEY, GEMINI_GENERATE_URL
-from utils.image_utils import clean_b64, get_ref_b64
+from utils.image_utils import clean_b64, get_image_data
 
 design_bp = Blueprint('design', __name__)
 
@@ -57,26 +57,42 @@ def generate_image():
     if not all([image_base64, mask_base64, furniture_image]):
         return jsonify({"error": "Missing image, mask, or furniture reference"}), 400
 
-    base_image_clean = clean_b64(image_base64)
-    mask_clean = clean_b64(mask_base64)
-    ref_image_clean = get_ref_b64(furniture_image)
+    base_image_clean = get_image_data(image_base64)
+    mask_clean = get_image_data(mask_base64)
+    ref_image_clean = get_image_data(furniture_image)
+
+    # Determine actual MIME type from file extension if it's a URL
+    if image_base64.lower().endswith('.png'):
+        base_image_mime = 'image/png'
+    elif 'data:image/png' in image_base64:
+        base_image_mime = 'image/png'
+    else:
+        base_image_mime = 'image/jpeg'
 
     refined_prompt = (
-        f"Instruction: In the first image, using the second image as a mask (white area is the target zone), "
-        f"seamlessly inpaint a {item_name}. Use ONLY the foreground object in the third image as a style and material reference for the {item_category}. Match the room's lighting, perspective, and shadows."
+        f"Inpaint a {item_name} into the area masked by the second image. "
+        f"Use the third image as a style and material reference for the {item_category}. "
+        f"Ensure it perfectly matches the lighting, shadows, and perspective of the first room image."
     )
 
     payload = {
         "contents": [{
-            "role": "user",
             "parts": [
-                { "inline_data": { "mime_type": "image/jpeg", "data": base_image_clean } },
-                { "inline_data": { "mime_type": "image/png", "data": mask_clean } },
-                { "inline_data": { "mime_type": "image/jpeg", "data": ref_image_clean } },
-                { "text": refined_prompt }
+                { "text": refined_prompt },
+                { "inlineData": { "mimeType": base_image_mime, "data": base_image_clean } },
+                { "inlineData": { "mimeType": "image/png", "data": mask_clean } },
+                { "inlineData": { "mimeType": "image/jpeg", "data": ref_image_clean } }
             ]
         }],
-        "generationConfig": { "responseModalities": ["IMAGE"] }
+        "generationConfig": { 
+            "responseModalities": ["IMAGE"] 
+        },
+        "safetySettings": [
+            { "category": "HARM_CATEGORY_HARASSMENT", "threshold": "BLOCK_NONE" },
+            { "category": "HARM_CATEGORY_HATE_SPEECH", "threshold": "BLOCK_NONE" },
+            { "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT", "threshold": "BLOCK_NONE" },
+            { "category": "HARM_CATEGORY_DANGEROUS_CONTENT", "threshold": "BLOCK_NONE" }
+        ]
     }
 
     try:
@@ -84,6 +100,7 @@ def generate_image():
         response_data = response.json()
 
         if response.status_code != 200:
+            print(f"GEMINI ERROR ({response.status_code}): {response.text}")
             return jsonify({"error": response_data}), response.status_code
 
         candidates = response_data.get('candidates', [])

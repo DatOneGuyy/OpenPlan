@@ -1,59 +1,59 @@
-.room-menu {
+.room-options-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding: 20px;
+}
+
+.room-option-btn {
     display: flex;
     flex-direction: column;
-    padding: 0 24px;
-    gap: 12px;
-}
-
-.room-menu-item {
-    display: flex;
     align-items: center;
-    gap: 16px;
-    padding: 16px;
-    background-color: var(--primary-blue-light);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 8px;
+    background-color: var(--primary-blue-soft);
+    border: 1px solid var(--primary-blue-soft-border);
+    border-radius: 14px;
     cursor: pointer;
-    text-align: left;
-    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-    width: 100%;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
 }
 
-.room-menu-item:hover {
-    background-color: var(--text-white);
-    border-color: var(--primary-blue-light);
+.room-option-btn:hover {
+    background-color: var(--primary-blue-soft-hover);
+    border-color: var(--primary-blue-soft-border-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
-.room-menu-icon {
-    width: 40px;
-    height: 40px;
-    background-color: var(--text-white);
-    border-radius: 10px;
+.room-option-icon {
+    width: 32px;
+    height: 32px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 18px;
-    color: var(--primary-blue);
+    background-color: white; /* Maintain white background for icon bubble */
+    border-radius: 10px;
     flex-shrink: 0;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
-.room-menu-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
+.room-option-icon img {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
 }
 
-.room-menu-title {
-    font-size: 14px;
+.room-option-btn span {
+    font-size: 12px;
     font-weight: 600;
     color: var(--text-dark);
 }
 
-.room-menu-desc {
-    font-size: 12px;
-    color: var(--text-gray);
-    line-height: 1.4;
+/* Full width for Export button at the bottom */
+#exportRoomBtn {
+    grid-column: span 2;
+    flex-direction: row;
+    height: 48px;
+    gap: 12px;
 }

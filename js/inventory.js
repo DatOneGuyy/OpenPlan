@@ -8,7 +8,8 @@ const inventorySubtitle = document.querySelector('.inventory-subtitle');
 export function updateInventoryUI() {
     if (!inventoryList || !emptyInventoryState || !inventorySubtitle) return;
 
-    inventorySubtitle.textContent = `${state.addedFurnishings.length} items in room`;
+    const count = state.addedFurnishings.length;
+    inventorySubtitle.textContent = `${count} ${count === 1 ? 'item' : 'items'} in room`;
 
     if (state.addedFurnishings.length > 0) {
         emptyInventoryState.style.display = 'none';

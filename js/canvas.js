@@ -10,22 +10,25 @@ const workspace = document.querySelector('.workspace');
 export function fitCanvasToScreen() {
     if (!state.currentImgWidth || !state.currentImgHeight) return;
     
-    // Calculate scale to fit inside workspace with a 40px padding
-    const padding = 40;
-    const availableWidth = workspace.clientWidth - padding * 2;
-    const availableHeight = workspace.clientHeight - padding * 2;
-    
-    const scaleX = availableWidth / state.currentImgWidth;
-    const scaleY = availableHeight / state.currentImgHeight;
-    
-    // Scale to fit, but don't upscale infinitely if the image is tiny
-    const scale = Math.min(scaleX, scaleY);
-    
-    canvasArea.style.transform = `scale(${scale})`;
-    canvasArea.style.transformOrigin = 'center center';
-    
-    // Ensure flexbox centers the scaled item correctly without causing layout jumps
-    canvasArea.style.position = 'absolute';
+    // Use requestAnimationFrame to ensure the workspace layout is fully calculated 
+    // (e.g., after sidebar animations or initial render)
+    requestAnimationFrame(() => {
+        const padding = 40;
+        const availableWidth = workspace.clientWidth - padding * 2;
+        const availableHeight = workspace.clientHeight - padding * 2;
+        
+        const scaleX = availableWidth / state.currentImgWidth;
+        const scaleY = availableHeight / state.currentImgHeight;
+        
+        // Scale to fit, but don't upscale infinitely if the image is tiny
+        const scale = Math.min(scaleX, scaleY);
+        
+        canvasArea.style.transform = `scale(${scale})`;
+        canvasArea.style.transformOrigin = 'center center';
+        
+        // Ensure flexbox centers the scaled item correctly
+        canvasArea.style.position = 'absolute';
+    });
 }
 
 export function handleImageUpload(e) {

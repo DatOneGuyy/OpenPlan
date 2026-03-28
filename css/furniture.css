@@ -146,36 +146,41 @@
     background-color: var(--bg-light);
 }
 
+.furniture-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+}
+
 .add-to-room-btn {
     position: absolute;
-    top: 8px;
-    right: 8px;
-    width: 28px;
-    height: 28px;
-    background-color: var(--text-white);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: var(--primary-blue-soft);
+    border-top: 1px solid var(--primary-blue-soft-border);
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     opacity: 0;
-    transition: opacity 0.2s, background-color 0.2s;
-}
-
-.add-to-room-btn img {
-    width: 16px;
-    height: 16px;
-    filter: invert(46%) sepia(61%) saturate(2250%) hue-rotate(205deg) brightness(97%) contrast(93%);
+    transform: translateY(100%);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary-blue);
+    z-index: 2;
+    background: #f4f8ff;
 }
 
 .add-to-room-btn:hover {
-    background-color: var(--bg-light);
+    background: #e0eeff;
 }
 
 .furniture-card:hover .add-to-room-btn {
     opacity: 1;
+    transform: translateY(0);
 }
 
 .furniture-details {
@@ -217,7 +222,8 @@
 .furniture-rating {
     font-size: 12px;
     font-weight: 600;
-    color: #eab308; /* aesthetic star yellow */
+    color: #eab308;
+    /* aesthetic star yellow */
     display: flex;
     align-items: center;
     gap: 2px;

@@ -2,10 +2,12 @@ import { state } from './state.js';
 import { updateInventoryUI } from './inventory.js';
 import { drawMasks } from './masks.js';
 import { showAlert, showConfirm } from './dialogs.js';
+import { handleSaveProject, openProjectsModal } from './projects.js';
 
 export function initRoomModule() {
     const createNewRoomBtn = document.getElementById('createNewRoomBtn');
     const saveRoomBtn = document.getElementById('saveRoomBtn');
+    const myProjectsBtn = document.getElementById('myProjectsBtn');
     const clearItemsBtn = document.getElementById('clearItemsBtn');
     const exportRoomBtn = document.getElementById('exportRoomBtn');
 
@@ -19,7 +21,13 @@ export function initRoomModule() {
 
     if (saveRoomBtn) {
         saveRoomBtn.addEventListener('click', async () => {
-            await showAlert('Save Room functionality will be implemented in a future update.', 'Save Room');
+            await handleSaveProject();
+        });
+    }
+
+    if (myProjectsBtn) {
+        myProjectsBtn.addEventListener('click', async () => {
+            await openProjectsModal();
         });
     }
 

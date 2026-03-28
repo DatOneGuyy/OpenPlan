@@ -44,19 +44,20 @@
 }
 
 .inspiration-chip {
+    padding: 8px 16px;
+    border-radius: 20px;
     background-color: var(--bg-light);
-    color: var(--text-gray-dark);
     border: none;
-    padding: 6px 14px;
-    border-radius: 16px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 500;
+    color: var(--text-dark);
     cursor: pointer;
-    transition: all 0.2s ease;
+    white-space: nowrap;
+    transition: all 0.2s;
 }
 
-.inspiration-chip:hover {
-    background-color: #e5e7eb;
+.inspiration-chip:hover:not(.active) {
+    background-color: #e5e5e5;
 }
 
 .inspiration-chip.active {

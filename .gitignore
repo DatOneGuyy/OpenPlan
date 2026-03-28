@@ -29,3 +29,8 @@ tmp/
 .vscode/
 .idea/
 *.log
+app.db
+static/projects/*
+!static/projects/.gitkeep
+config.py
+.env*

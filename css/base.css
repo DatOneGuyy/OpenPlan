@@ -5,6 +5,10 @@
     --border-color: #e5e5e5;
     --primary-blue: #4181f0;
     --primary-blue-light: rgba(65, 129, 240, 0.2);
+    --primary-blue-soft: #f4f8ff;
+    --primary-blue-soft-hover: #e0eeff;
+    --primary-blue-soft-border: #e2ecfd;
+    --primary-blue-soft-border-hover: #d1e1fd;
     --text-dark: #171717;
     --text-white: #ffffff;
     --text-gray: #737373;

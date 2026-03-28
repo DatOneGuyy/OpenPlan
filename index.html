@@ -23,11 +23,25 @@
     <div class="app-container">
         <!-- Top Nav -->
         <header class="topnav">
-            <div class="logo-container">
-                <img src="/icons/openplan.svg" alt="OpenPlan Logo"
-                    class="logo-icon">
-                <span class="logo-text">OpenPlan</span>
+            <div class="topnav-left">
+                <div class="logo-container">
+                    <img src="/icons/openplan.svg" alt="OpenPlan Logo" class="logo-icon">
+                    <span class="logo-text">OpenPlan</span>
+                </div>
+                <div class="nav-divider"></div>
+                <div class="auth-container" id="authContainer">
+                <a href="/login" class="upload-btn" id="loginTrigger">Log In</a>
+                <a href="/signup" class="upload-btn" id="registerTrigger" style="margin: 0;">Sign Up</a>
             </div>
+                <div class="user-status-container" id="userStatusContainer" style="display: none;">
+                    <div class="user-info">
+                        <img src="/icons/user.svg" alt="User" class="user-icon">
+                        <span id="welcomeText" class="welcome-text"></span>
+                    </div>
+                    <button class="upload-btn" id="logoutBtn" style="margin-left: 12px;">Logout</button>
+                </div>
+            </div>
+            
             <label for="room-upload" class="upload-btn">
                 <img src="/icons/upload.svg" alt="Upload" class="upload-icon">
                 Upload Room
@@ -61,42 +75,36 @@
                 <div class="sidebar-panel-header">
                     <h2>Room Settings</h2>
                 </div>
-                <div class="room-menu">
-                    <button class="room-menu-item" id="createNewRoomBtn">
-                        <div class="room-menu-icon">
-                            <img src="/icons/create.svg" alt="Create" style="width: 20px; height: 20px;">
+                <div class="room-options-grid">
+                    <button class="room-option-btn" id="createNewRoomBtn">
+                        <div class="room-option-icon">
+                            <img src="/icons/create.svg" alt="Create">
                         </div>
-                        <div class="room-menu-text">
-                            <div class="room-menu-title">Create New Room</div>
-                            <div class="room-menu-desc">Clear all items and start fresh</div>
-                        </div>
+                        <span>Create New Room</span>
                     </button>
-                    <button class="room-menu-item" id="saveRoomBtn">
-                        <div class="room-menu-icon">
-                            <img src="/icons/save.svg" alt="Save" style="width: 20px; height: 20px;">
+                    <button class="room-option-btn" id="saveRoomBtn">
+                        <div class="room-option-icon">
+                            <img src="/icons/save.svg" alt="Save">
                         </div>
-                        <div class="room-menu-text">
-                            <div class="room-menu-title">Save Room</div>
-                            <div class="room-menu-desc">Save current design to account</div>
-                        </div>
+                        <span>Save Room</span>
                     </button>
-                    <button class="room-menu-item" id="clearItemsBtn">
-                        <div class="room-menu-icon">
-                            <img src="/icons/clear.svg" alt="Clear" style="width: 20px; height: 20px;">
+                    <button class="room-option-btn" id="myProjectsBtn">
+                        <div class="room-option-icon">
+                            <img src="/icons/projects.svg" alt="My Rooms">
                         </div>
-                        <div class="room-menu-text">
-                            <div class="room-menu-title">Clear Items</div>
-                            <div class="room-menu-desc">Keep room, remove all furniture</div>
-                        </div>
+                        <span>My Rooms</span>
                     </button>
-                    <button class="room-menu-item" id="exportRoomBtn">
-                        <div class="room-menu-icon">
-                            <img src="/icons/export.svg" alt="Export" style="width: 20px; height: 20px;">
+                    <button class="room-option-btn" id="clearItemsBtn">
+                        <div class="room-option-icon">
+                            <img src="/icons/clear.svg" alt="Clear">
                         </div>
-                        <div class="room-menu-text">
-                            <div class="room-menu-title">Export</div>
-                            <div class="room-menu-desc">Save high-res image to your device</div>
+                        <span>Clear Items</span>
+                    </button>
+                    <button class="room-option-btn" id="exportRoomBtn">
+                        <div class="room-option-icon">
+                            <img src="/icons/export.svg" alt="Export">
                         </div>
+                        <span>Export</span>
                     </button>
                 </div>
             </aside>
@@ -328,7 +336,22 @@
         </div>
     </div>
 
-    <script type="module" src="js/main.js?v=1.1"></script>
+    <div class="modal-overlay" id="projectsModal">
+        <div class="modal-content glass-modal" style="width: 800px; max-width: 90vw; height: 600px; max-height: 80vh;">
+            <div class="modal-header">
+                <h3>My Rooms</h3>
+                <button class="inventory-item-delete" id="closeProjectsModalBtn">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </button>
+            </div>
+            <div class="modal-body" style="overflow-y: auto;">
+                <div id="projectsGrid" class="projects-grid">
+                    <!-- Projects will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="module" src="js/main.js"></script>
 </body>
 
 </html>
